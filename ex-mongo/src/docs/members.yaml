@@ -1,0 +1,18 @@
+paths:
+  /users/{id}:
+    get:
+      tags:
+      - users
+      summary: Find User By Id
+      parameters:
+      - name: id
+        in: path
+        description: User Id
+        required: true
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'

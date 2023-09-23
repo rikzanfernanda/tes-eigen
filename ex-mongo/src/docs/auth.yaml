@@ -1,0 +1,81 @@
+paths:
+  /signup:
+    post:
+      tags:
+        - auth
+      summary: Register new user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/signup"
+      responses:
+        201:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/response-success'
+        409:
+          description: "Validation error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/error409"
+        500:
+          description: "Internal server error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/error500"
+
+definitions:
+  signup:
+    type: object
+    required:
+      - name
+      - email
+      - password
+    properties:
+      name:
+        type: string
+        required: true
+      email:
+        type: string
+        required: true
+      password:
+        type: string
+        required: true
+
+  response-success:
+    type: object
+    properties:
+      status:
+        type: integer
+        example: 201
+      message:
+        type: string
+      data:
+        type: object
+
+  error409:
+    type: object
+    properties:
+      status:
+        type: integer
+        example: 409
+      message:
+        type: string
+      errors:
+        type: array
+        items:
+          type: object
+
+  error500:
+    type: object
+    properties:
+      status:
+        type: integer
+        example: 500
+      message:
+        type: string
