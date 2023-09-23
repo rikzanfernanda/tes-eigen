@@ -5,7 +5,6 @@ import mongoose from "mongoose";
 import request from "supertest";
 
 beforeAll(async () => {
-  await MemberModel.deleteMany({});
   await MemberModel.create({
     code: 'M-0001',
     name: 'test-member',
@@ -13,7 +12,7 @@ beforeAll(async () => {
 })
 
 afterAll(async () => {
-  await MemberModel.deleteMany({});
+  await MemberModel.deleteMany({}).exec();
   await mongoose.disconnect();
   await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
 });

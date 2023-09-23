@@ -21,7 +21,7 @@ const createCookie = (tokenData: TokenData): string => {
 @Service()
 export class AuthService {
   public async signup(userData: User): Promise<User> {
-    const findUser: User = await UserModel.findOne({ email: userData.email });
+    const findUser: User = await UserModel.findOne({ email: userData.email }).exec();
     if (findUser) throw new HttpException(404, `This email ${userData.email} already exists`);
 
     const hashedPassword = await hash(userData.password, 10);
