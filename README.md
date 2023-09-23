@@ -19,6 +19,11 @@ npm run test
 
 ## App
 ```sh
+# API documentation
+http://localhost:3000/api-docs
+```
+
+```sh
 cd ex-mongo
 
 # install dependencies
