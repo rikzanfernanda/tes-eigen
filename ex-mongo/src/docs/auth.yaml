@@ -15,7 +15,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/definitions/response-success'
+                $ref: "#/definitions/response-success"
+        409:
+          description: "Validation error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/error409"
+        500:
+          description: "Internal server error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/error500"
+
+  /login:
+    post:
+      tags:
+        - auth
+      summary: Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/login-payload"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/response200"
         409:
           description: "Validation error"
           content:
@@ -58,6 +88,17 @@ definitions:
       data:
         type: object
 
+  response200:
+    type: object
+    properties:
+      status:
+        type: integer
+        example: 200
+      message:
+        type: string
+      data:
+        type: object
+
   error409:
     type: object
     properties:
@@ -79,3 +120,17 @@ definitions:
         example: 500
       message:
         type: string
+
+  login-payload:
+    type: object
+    properties:
+      email:
+        type: string
+        required: true
+        example: joe@example.com
+      password:
+        type: string
+        required: true
+        min: 5
+        max: 32
+        example: joe12345
