@@ -1,10 +1,19 @@
 # Technical Test (Backend Developer) - Rikzan Fernanda
 
-## Test Case
+Test case
 ```
 https://github.com/eigen3dev/backend-test-case
 ```
+Use:
+```sh
+https://github.com/ljlm0402/typescript-express-starter
 
+npm install -g typescript-express-starter
+
+npx typescript-express-starter ex-mongo
+
+choose > mongoose
+```
 ## Algoritma
 ```sh
 # install dependencies
