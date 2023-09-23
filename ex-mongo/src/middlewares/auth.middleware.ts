@@ -21,18 +21,18 @@ export const AuthMiddleware = async (req: RequestWithUser, res: Response, next: 
 
     if (Authorization) {
       const { _id } = (await verify(Authorization, SECRET_KEY)) as DataStoredInToken;
-      const findUser = await UserModel.findById(_id);
+      const findUser = await UserModel.findById(_id).exec();
 
       if (findUser) {
         req.user = findUser;
         next();
       } else {
-        next(new HttpException(401, 'Wrong authentication token'));
+        next(new HttpException(401, 'Unauthorized'));
       }
     } else {
-      next(new HttpException(404, 'Authentication token missing'));
+      next(new HttpException(401, 'Unauthorized'));
     }
   } catch (error) {
-    next(new HttpException(401, 'Wrong authentication token'));
+    next(new HttpException(401, 'Unauthorized'));
   }
 };

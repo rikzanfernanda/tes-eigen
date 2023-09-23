@@ -1,5 +1,6 @@
 import { MemberController } from "@/controllers/members.controller";
 import { Routes } from "@/interfaces/routes.interface";
+import { AuthMiddleware } from "@/middlewares/auth.middleware";
 import { Router } from "express";
 
 export class MemberRoute implements Routes {
@@ -12,6 +13,6 @@ export class MemberRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`, this.member.getMembers);
+    this.router.get(`${this.path}`, AuthMiddleware, this.member.getMembers);
   }
 }

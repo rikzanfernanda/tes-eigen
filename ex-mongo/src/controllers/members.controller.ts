@@ -12,6 +12,7 @@ export class MemberController {
 
       res.status(200).json({
         status: 200,
+        message: 'Successfully get all members',
         data: findAllMembersData
       })
     } catch (error) {
