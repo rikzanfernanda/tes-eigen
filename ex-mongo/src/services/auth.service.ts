@@ -30,7 +30,7 @@ export class AuthService {
     return createUserData;
   }
 
-  public async login(userData: User): Promise<{ findUser: User, tokenData: TokenData }> {
+  public async login(userData: User): Promise<{ findUser: User; tokenData: TokenData }> {
     const findUser: User = await UserModel.findOne({ email: userData.email }).exec();
     if (!findUser) throw new HttpException(404, `Email or Password is wrong`);
 
@@ -38,9 +38,9 @@ export class AuthService {
     if (!isPasswordMatching) throw new HttpException(404, 'Email or Password is wrong');
 
     const tokenData = createToken(findUser);
-    console.log(findUser.name)
+    console.log(findUser.name);
 
-    return {findUser, tokenData };
+    return { findUser, tokenData };
   }
 
   public async logout(userData: User): Promise<User> {

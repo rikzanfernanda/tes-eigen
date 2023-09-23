@@ -1,11 +1,10 @@
-import { Routes } from "@/interfaces/routes.interface";
-import { NextFunction, Request, Response, Router } from "express";
-import { MemberRoute } from "@routes/members.route";
-import { UserRoute } from "@routes/users.route";
-import { AuthRoute } from "./auth.route";
+import { Routes } from '@/interfaces/routes.interface';
+import { NextFunction, Request, Response, Router } from 'express';
+import { MemberRoute } from '@routes/members.route';
+import { AuthRoute } from './auth.route';
 
 export class IndexRoute implements Routes {
-  path: string = '/';
+  path = '/';
   router: Router = Router();
 
   constructor() {
@@ -15,14 +14,10 @@ export class IndexRoute implements Routes {
   private initializeRoutes() {
     this.router.get(`${this.path}`, (req: Request, res: Response, next: NextFunction) => {
       res.status(200).json({
-        message: 'Welcome'
+        message: 'Welcome',
       });
     });
-  };
+  }
 }
 
-export const routes = [
-  new IndexRoute(),
-  new MemberRoute(),
-  new AuthRoute(),
-];
+export const routes = [new IndexRoute(), new MemberRoute(), new AuthRoute()];

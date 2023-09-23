@@ -9,19 +9,17 @@ export const ErrorMiddleware = (error: HttpException, req: Request, res: Respons
 
     logger.error(`[${req.method}] ${req.path} >> StatusCode:: ${status}, Message:: ${message}`);
 
-    switch (status) {
-      case 409:
-        res.status(status).json({
-          status,
-          message,
-          errors: error.errors
-        });
-        break;
-      default:
-        res.status(status).json({
-          status,
-          message
-        });
+    if (status === 409) {
+      res.status(status).json({
+        status,
+        message,
+        errors: error.errors,
+      });
+    } else {
+      res.status(status).json({
+        status,
+        message,
+      });
     }
   } catch (error) {
     next(error);

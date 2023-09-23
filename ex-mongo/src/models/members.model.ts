@@ -1,16 +1,16 @@
-import { Member } from "@/interfaces/members.interface";
-import { Document, Schema, model } from "mongoose";
+import { Member } from '@/interfaces/members.interface';
+import { Document, Schema, model } from 'mongoose';
 
 const MemberSchema: Schema = new Schema<Member>({
   code: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   name: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
 export const MemberModel = model<Member & Document>('Member', MemberSchema);

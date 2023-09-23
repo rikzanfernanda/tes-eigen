@@ -1,7 +1,7 @@
-import { Member } from "@/interfaces/members.interface";
-import { MemberService } from "@/services/members.service";
-import { NextFunction, Request, Response } from "express";
-import Container from "typedi";
+import { Member } from '@/interfaces/members.interface';
+import { MemberService } from '@/services/members.service';
+import { NextFunction, Request, Response } from 'express';
+import Container from 'typedi';
 
 export class MemberController {
   public member = Container.get(MemberService);
@@ -13,10 +13,10 @@ export class MemberController {
       res.status(200).json({
         status: 200,
         message: 'Successfully get all members',
-        data: findAllMembersData
-      })
+        data: findAllMembersData,
+      });
     } catch (error) {
       next(error);
     }
-  }
+  };
 }

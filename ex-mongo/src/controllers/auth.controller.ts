@@ -31,11 +31,11 @@ export class AuthController {
         status: 200,
         message: 'Login successful',
         data: {
-          '_id': findUser._id,
+          _id: findUser._id,
           name: findUser.name,
           email: findUser.email,
-          ...tokenData
-        }
+          ...tokenData,
+        },
       });
     } catch (error) {
       next(error);

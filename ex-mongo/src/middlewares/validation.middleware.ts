@@ -20,11 +20,11 @@ export const ValidationMiddleware = (type: any, skipMissingProperties = false, w
         next();
       })
       .catch((errors: ValidationError[]) => {
-        const message = 'Validation error'
+        const message = 'Validation error';
         const err = errors.map((error: ValidationError) => {
           return {
-            [error.property]:Object.values(error.constraints)
-          }
+            [error.property]: Object.values(error.constraints),
+          };
         });
         next(new HttpException(409, message, err));
       });

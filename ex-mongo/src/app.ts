@@ -77,8 +77,8 @@ export class App {
         servers: [
           {
             url: `http://localhost:${process.env.PORT}`,
-            description: 'Development server'
-          }
+            description: 'Development server',
+          },
         ],
       },
       apis: ['./src/docs/*.yaml'],

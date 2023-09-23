@@ -1,10 +1,10 @@
-import { MemberController } from "@/controllers/members.controller";
-import { Routes } from "@/interfaces/routes.interface";
-import { AuthMiddleware } from "@/middlewares/auth.middleware";
-import { Router } from "express";
+import { MemberController } from '@/controllers/members.controller';
+import { Routes } from '@/interfaces/routes.interface';
+import { AuthMiddleware } from '@/middlewares/auth.middleware';
+import { Router } from 'express';
 
 export class MemberRoute implements Routes {
-  public path: string = '/members';
+  public path = '/members';
   public router: Router = Router();
   public member = new MemberController();
 

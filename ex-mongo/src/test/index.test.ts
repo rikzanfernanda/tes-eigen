@@ -18,7 +18,7 @@ describe('Testing Index', () => {
       expect(db.readyState).toBe(1);
     });
 
-    test('response statusCode 200', (done) => {
+    test('response statusCode 200', done => {
       const indexRoute = new IndexRoute();
       const app = new App([indexRoute]);
 
