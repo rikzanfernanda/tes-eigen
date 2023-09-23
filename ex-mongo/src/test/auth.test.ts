@@ -1,4 +1,3 @@
-import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
 import request from 'supertest';
 import { App } from '@/app';
@@ -10,7 +9,7 @@ const authRoute = new AuthRoute();
 
 const app = new App([authRoute]);
 
-const userInput: CreateUserDto = {
+const payload: CreateUserDto = {
   email: "test@example.com",
   name: "Jane Doe",
   password: "Password123",
@@ -22,16 +21,30 @@ afterAll(async () => {
 });
 
 describe('Testing Auth', () => {
-  describe('[POST] /signup', () => {
+  describe('[POST] signup', () => {
     test('response should have the Create userData', (done) => {
-      request(app.getServer()).post(`${authRoute.path}signup`).send(userInput)
+      request(app.getServer()).post(`${authRoute.path}signup`).send(payload)
         .then(res => {
           expect(res.statusCode).toEqual(201);
-          expect(res.body.data.email).toEqual(userInput.email);
+          expect(res.body.data.email).toEqual(payload.email);
           done();
         });
     });
   });
+
+  describe('[POST] login', () => {
+    test('should return user data and token', (done) => {
+      request(app.getServer()).post(`${authRoute.path}login`).send({
+        email: payload.email,
+        password: payload.password
+      })
+        .then(res => {
+          expect(res.statusCode).toEqual(200);
+          expect(res.body.data.email).toEqual(payload.email);
+          done();
+        })
+    })
+  })
 
   //   describe('[POST] /login', () => {
   //     it('response should have the Set-Cookie header with the Authorization token', async () => {

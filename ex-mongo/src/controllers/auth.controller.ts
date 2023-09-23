@@ -25,10 +25,18 @@ export class AuthController {
   public logIn = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const userData: User = req.body;
-      const { cookie, findUser } = await this.auth.login(userData);
+      const { findUser, tokenData } = await this.auth.login(userData);
 
-      res.setHeader('Set-Cookie', [cookie]);
-      res.status(200).json({ data: findUser, message: 'login' });
+      res.status(200).json({
+        status: 200,
+        message: 'Login successful',
+        data: {
+          '_id': findUser._id,
+          name: findUser.name,
+          email: findUser.email,
+          ...tokenData
+        }
+      });
     } catch (error) {
       next(error);
     }
